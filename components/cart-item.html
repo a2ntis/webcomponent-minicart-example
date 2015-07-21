@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+<template id="template">
+	<style>
+		.item {
+			min-height: 20px;
+			padding: 5px;
+			margin-bottom: 5px;
+			border-bottom: 1px dashed #969696;
+			overflow: hidden;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		.item:hover {
+			background-color: #ebebeb;
+		}
+		.img {
+			float: left;
+			padding: 0 10px 0 0;
+			width: 30%;
+		}
+		.info {
+			font-size: 100%;
+			overflow: hidden;
+		}
+		img {
+			display: block;
+			width: 100%;
+		}
+		h3 {
+			font-size: 1.1em;
+			font-weight: normal;
+			margin: 0 0 5px;
+		}
+		h3 a {
+			color: #00bcd4;
+			text-decoration: none;
+		}
+		h3 a:hover {
+			color: #333;
+		}
+		.price {
+			display: block;
+			font-size: 1em;
+		}
+		:host {
+			display: block;
+		}
+		.remove {
+			color: #00bcd4;
+			text-decoration: none;
+			float: right;
+			border: 1px solid #00bcd4;
+			border-radius: 100%;
+			width: 16px;
+			text-align: center;
+			line-height: 13px;
+			vertical-align: middle;
+			height: 16px;
+			font-family: monospace;
+			font-weight: bold;
+		}
+		.remove:hover {
+			color: #fff;
+			background: #333;
+			border-color: #333;
+		}
+	</style>
+	<div class="item">
+		<div class="img"><img/></div>
+		<div class="info">
+			<h3><a><content select="name"></content></a></h3>
+			<span class="price"><content select="qty"></content>x <content select="price"></content>
+			<a class="remove" title="remove">x</a>
+		</div>
+	</div>
+</template>
+
+<script>
+	(function(window, document, undefined) {
+		var localDocument =  (document._currentScript || document.currentScript).ownerDocument;
+		var template = localDocument.querySelector('template');
+		var ItemPrototype = Object.create(HTMLElement.prototype);
+
+		ItemPrototype.createdCallback = function() {
+			var root = this.createShadowRoot();
+			var url = this.getAttribute('url');
+			var imageUrl = this.querySelector('product-image').innerHTML;
+			var removeUrl = this.getAttribute('remove-url');
+			var name = this.querySelector('name').innerHTML;
+			root.appendChild(template.content.cloneNode(true));
+			root.querySelector('a').setAttribute('href', url);
+			root.querySelector('a.remove').setAttribute('href', removeUrl);
+			root.querySelector('img').setAttribute('src', imageUrl);
+			root.querySelector('img').setAttribute('alt', name);
+			root.querySelector('img').setAttribute('title', name);
+		};
+
+		window.MyElement = document.registerElement('cart-item', {
+			prototype: ItemPrototype
+		});
+
+	})(window, document);
+</script>
+
+</body>
+
+</html>

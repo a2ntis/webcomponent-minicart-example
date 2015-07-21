@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mini Cart</title>
+	<link rel="import" href="components/mini-cart.html"/>
+	<!-- if you need to work with FF, IE, etc -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.7/webcomponents.min.js"></script>-->
+</head>
+<body>
+	<style>
+		ui-minicart {
+			display: block; /* for old browsers */
+			max-width: 300px;
+		}
+	</style>
+	<mini-cart cart-url="/cart" checkout-url="/checkout">
+		<cart-item url="/product1" remove-url="/cart/?remove=product1">
+			<product-image>http://enterprise-demo.user.magentotrial.com/media/catalog/product/cache/1/small_image/210x/9df78eab33525d08d6e5fb8d27136e95/m/s/msj012t_2.jpg</product-image>
+			<name>Product Example</name>
+			<qty>1</qty>
+			<price>$120</price>
+		</cart-item>
+		<cart-item url="/product2" remove-url="/cart/?remove=product2">
+			<product-image>http://enterprise-demo.user.magentotrial.com/media/catalog/product/cache/1/small_image/210x/9df78eab33525d08d6e5fb8d27136e95/m/t/mtk004t.jpg</product-image>
+			<name>Product Example 2</name>
+			<qty>2</qty>
+			<price>$250</price>
+		</cart-item>
+		<total>$500</total>
+	</mini-cart>
+</body>
+</html>

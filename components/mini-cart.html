@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="import" href="cart-item.html" />
+</head>
+<body>
+
+<template id="template">
+	<style>
+		.content {
+			font-family: Arial, Helvetica, sans-serif;
+			min-height: 20px;
+			padding: 10px 15px;
+			margin-bottom: 10px;
+			background-color: #fefefe;
+			border: 1px solid #969696;
+			border-radius: 4px;
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+			font-size:100%
+		}
+		:host {
+			display: block;
+		}
+		h2 {
+			font-size: 1.2em;
+			margin: 0 0 20px;
+			color: #333;
+		}
+		strong {
+			color: #333;
+			font-size: 1.2em;
+			margin: 15px 0;
+			display: block;
+		}
+		strong span {
+			float: right;
+		}
+		.buttons {
+			font-size: 1em;
+			overflow: hidden;
+		}
+		.buttons a {
+			float: left;
+			color: #333;
+			text-decoration: none;
+			border: 1px solid #969696;
+			padding: 5px 10px;
+		}
+		.buttons a:hover {
+			background-color: #00bcd4;
+			color: #fff;
+			border-color: #00bcd4;
+		}
+		.buttons a:nth-child(2) {
+			float: right;
+		}
+	</style>
+	<div class="content">
+		<h2>Shopping Cart</h2>
+		<content select="cart-item"></content>
+		<strong>Total: <span><content select="total"></content></span></strong>
+		<div class="buttons">
+			<a class="cart-btn">Edit Cart</a>
+			<a class="checkout-btn">Proceed to Checkout</a>
+		</div>
+	</div>
+</template>
+
+<script>
+	(function(window, document, undefined) {
+		// Refers to the "importer", which is index.html
+		var localDocument =  (document._currentScript || document.currentScript).ownerDocument;
+		var template = localDocument.querySelector('template');
+
+		var CartPrototype = Object.create(HTMLElement.prototype);
+
+		CartPrototype.createdCallback = function() {
+			var root = this.createShadowRoot();
+			var cartUrl = this.getAttribute('cart-url');
+			var checkoutUrl = this.getAttribute('checkout-url');
+			root.appendChild(template.content.cloneNode(true));
+			root.querySelector('a.cart-btn').setAttribute('href', cartUrl);
+			root.querySelector('a.checkout-btn').setAttribute('href', checkoutUrl);
+		};
+		window.MyElement = document.registerElement('mini-cart', {
+			prototype: CartPrototype
+		});
+	})(window, document);
+</script>
+
+</body>
+
+</html>
