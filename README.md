@@ -1,11 +1,11 @@
 # webcomponent-minicart-example
 Пример использования web components.
 
-Это примерн я создал для того, что-бы показать, как просто и элегантно можно использовать web компоненты.
+Это пример я создал для того, чтобы показать, как просто и элегантно можно использовать web компоненты.
 
-Для использования этово примера достаточно подключить к вашему проект мой html файл:
+Для использования этого примера достаточно подключить к вашему проект мой html файл:
 
-    <link rel="import" href="cart-item.html" />
+    <link rel="import" href="components/mini-cart.html"/>
 
 И написать такой html код (ссылки тут просто для примера):
 
@@ -29,4 +29,5 @@
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.7/webcomponents.min.js"></script>
 
-В этом случае пример будет работать на всех современных браузерах.
+Список поддерживаемых браузеров можно посмотреть тут:
+https://github.com/webcomponents/webcomponentsjs/#browser-support
